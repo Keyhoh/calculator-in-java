@@ -1,12 +1,13 @@
 package tutorial;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 /**
- * 計算式を組み立てて計算させるクラス
+ * 計算式を組み立てるクラス
  */
-public class CalculateController {
+public class ExpressionBuilder {
     private Expression expression = new Expression();
     private final Predicate<String> IS_NUMBER = Pattern.compile("-?\\d{0,9}").asMatchPredicate();
     private final Predicate<String> IS_OPERATOR = Pattern.compile("[+\\-*/]").asMatchPredicate();
@@ -16,7 +17,7 @@ public class CalculateController {
      *
      * @param a 初期化する値
      */
-    public void init(Integer a) {
+    public void init(Long a) {
         expression.setA(a);
         expression.setB(null);
         expression.setOperator(null);
@@ -26,7 +27,7 @@ public class CalculateController {
      * 計算式を初期化する
      */
     public void init() {
-        init(0);
+        init(0L);
     }
 
     /**
@@ -34,7 +35,7 @@ public class CalculateController {
      */
     public void init(String a) {
         if (IS_NUMBER.test(a)) {
-            init(Integer.valueOf(a));
+            init(Long.valueOf(a));
         } else {
             init();
         }
@@ -46,11 +47,11 @@ public class CalculateController {
      *
      * @param str キーボード入力値
      */
-    public void input(String str) {
+    public void composedOf(String str) {
         if (IS_OPERATOR.test(str)) {
             expression.setOperator(str);
         } else if (IS_NUMBER.test(str)) {
-            Integer i = Integer.valueOf(str);
+            Long i = Long.valueOf(str);
             if (expression.getOperator() == null) {
                 expression.setA(i);
             } else {
@@ -63,11 +64,7 @@ public class CalculateController {
         return expression.getB() != null;
     }
 
-    public String calculate() {
-        return Calculator.calculate(expression);
-    }
-
-    public Expression getExpression() {
-        return expression;
+    public Expression build() {
+        return this.expression;
     }
 }

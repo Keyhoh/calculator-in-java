@@ -3,16 +3,16 @@ package tutorial;
 import java.util.function.BiFunction;
 
 public abstract class Calculator {
-    private static final BiFunction<Integer, Integer, Integer> add = (a, b) -> a + b;
-    private static final BiFunction<Integer, Integer, Integer> sub = (a, b) -> a - b;
-    private static final BiFunction<Integer, Integer, Integer> mul = (a, b) -> a * b;
-    private static final BiFunction<Integer, Integer, Integer> div = (a, b) -> (a - a % b) / b;
+    private static final BiFunction<Long, Long, Long> add = (a, b) -> a + b;
+    private static final BiFunction<Long, Long, Long> sub = (a, b) -> a - b;
+    private static final BiFunction<Long, Long, Long> mul = (a, b) -> a * b;
+    private static final BiFunction<Long, Long, Long> div = (a, b) -> (a - a % b) / b;
 
     /**
      * 計算式を計算する
      *
      * @param expression 計算式
-     * @return Integer
+     * @return Long
      */
     public static String calculate(Expression expression) {
         switch (expression.getOperator()) {
