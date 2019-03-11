@@ -1,9 +1,9 @@
 package tutorial;
 
 public class Expression {
-    private Integer a = 0;
-    private Integer b = null;
-    private String operator = null;
+    private Long a;
+    private Long b;
+    private String operator;
 
     @Override
     public String toString() {
@@ -20,19 +20,19 @@ public class Expression {
         return sb.toString();
     }
 
-    public Integer getA() {
+    public Long getA() {
         return a;
     }
 
-    public void setA(Integer a) {
+    public void setA(Long a) {
         this.a = a;
     }
 
-    public Integer getB() {
+    public Long getB() {
         return b;
     }
 
-    public void setB(Integer b) {
+    public void setB(Long b) {
         this.b = b;
     }
 
