@@ -7,25 +7,25 @@ import java.util.Scanner;
 public class MainThread implements Runnable {
     private Scanner sc = new Scanner(System.in);
     private PrintStream ps = new PrintStream(System.out);
-    private CalculateController cc = new CalculateController();
+    private ExpressionBuilder eb = new ExpressionBuilder();
 
     @Override
     public void run() {
         ps.println("Start Calculator!");
         ps.println("Enter 'q' if quit.");
-        cc.init();
+        eb.init();
         while (true) {
             try {
                 String in = sc.next();
                 if (Objects.equals(in, "q")) {
                     break;
                 }
-                cc.input(in);
-                ps.println("expression: " + cc.getExpression());
-                if (cc.isCalculable()) {
-                    String result = cc.calculate();
+                eb.composedOf(in);
+                ps.println("expression: " + eb.build());
+                if (eb.isCalculable()) {
+                    String result = Calculator.calculate(eb.build());
                     ps.println("result: " + result);
-                    cc.init(result);
+                    eb.init(result);
                 }
             } catch (Exception e) {
                 System.err.println(e.getMessage());
